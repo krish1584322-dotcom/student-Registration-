@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kalai Private Tutorial - Complete Registration System</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#" class="logo" onclick="showPage('home')">📚 Kalai Tutorial</a>
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" onclick="showPage('home'); return false;" class="active" id="navHome">Home</a></li>
+            <li><a href="#" onclick="showPage('register'); return false;" id="navRegister">Register</a></li>
+            <li><a href="#" onclick="showPage('about'); return false;" id="navAbout">About</a></li>
+            <li><a href="#" onclick="showPage('features'); return false;" id="navFeatures">Features</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="main-content" id="homePage">
+    <div class="hero">
+        <h1>Welcome to Kalai Private Tutorial</h1>
+        <p>Your complete registration and learning management solution</p>
+        <a href="#" class="cta-button" onclick="showPage('register'); return false;">Get Started →</a>
+    </div>
+    
+    <div class="features">
+        <div class="feature-card" onclick="showToast('Secure registration with validation! 🔒')">
+            <div class="feature-icon">🔒</div>
+            <h3>Secure Registration</h3>
+            <p>Advanced validation with password strength checking and real-time feedback</p>
+        </div>
+        <div class="feature-card" onclick="showToast('Track your learning progress! 📚')">
+            <div class="feature-icon">📚</div>
+            <h3>Learning Management</h3>
+            <p>Comprehensive tutorial management system with progress tracking</p>
+        </div>
+        <div class="feature-card" onclick="showToast('Beautiful and responsive! 📱')">
+            <div class="feature-icon">📱</div>
+            <h3>Responsive Design</h3>
+            <p>Works perfectly on all devices from mobile to desktop</p>
+        </div>
+    </div>
+    
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number" id="userCount">0</div>
+            <div class="stat-label">Registered Students</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Support Available</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Satisfaction Rate</div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content" id="registerPage" style="display: none;">
+    <div class="form-container">
+        <h2>📝 Student Registration Form</h2>
+        <form id="registrationForm" novalidate>
+            <div class="form-group">
+                <label for="name">Full Name *</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+
+            <div class="form-group">
+                <label for="birthdate">Birth Date</label>
+                <input type="date" id="birthdate" name="birthdate">
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username *</label>
+                <input type="text" id="username" name="username" minlength="3" maxlength="20" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password *</label>
+                <input type="password" id="password" name="password" required>
+                <div class="password-requirements" id="passwordRequirements">
+                    <div class="requirement unmet" id="lengthReq">✓ At least 8 characters</div>
+                    <div class="requirement unmet" id="upperReq">✓ One uppercase letter</div>
+                    <div class="requirement unmet" id="lowerReq">✓ One lowercase letter</div>
+                    <div class="requirement unmet" id="numberReq">✓ One number</div>
+                    <div class="requirement unmet" id="specialReq">✓ One special character</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password *</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <div class="radio-group" id="genderGroup">
+                    <div class="radio-item">
+                        <input type="radio" id="male" name="gender" value="male">
+                        <label for="male">Male</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female">Female</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="other" name="gender" value="other">
+                        <label for="other">Other</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Subjects Interested In (select up to 3)</label>
+                <div class="checkbox-group" id="interestsGroup">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="mathematics" name="interests[]" value="mathematics">
+                        <label for="mathematics">📐 Mathematics</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="science" name="interests[]" value="science">
+                        <label for="science">🔬 Science</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="english" name="interests[]" value="english">
+                        <label for="english">📖 English</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="programming" name="interests[]" value="programming">
+                        <label for="programming">💻 Programming</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="arts" name="interests[]" value="arts">
+                        <label for="arts">🎨 Arts</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country *</label>
+                <select id="country" name="country" required>
+                    <option value="">Select a country</option>
+                    <option value="us">🇺🇸 United States</option>
+                    <option value="ca">🇨🇦 Canada</option>
+                    <option value="uk">🇬🇧 United Kingdom</option>
+                    <option value="au">🇦🇺 Australia</option>
+                    <option value="in">🇮🇳 India</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="bio">About Yourself</label>
+                <textarea id="bio" name="bio" rows="4" maxlength="500" 
+                          placeholder="Tell us about yourself and your learning goals..."></textarea>
+                <div id="bioCounter">0/500 characters</div>
+            </div>
+
+            <div class="form-group">
+                <label>
+                    <input type="checkbox" id="terms" name="terms" required>
+                    I agree to the Terms and Conditions *
+                </label>
+            </div>
+
+            <div style="display: flex; gap: 1rem;">
+                <button type="submit">Register Now</button>
+                <button type="button" onclick="exportFormData()" style="background: linear-gradient(135deg, #27ae60 0%, #229954 100%);">📥 Export Data</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="main-content" id="aboutPage" style="display: none;">
+    <div class="about-container">
+        <div class="about-header">
+            <h1>📚 Kalai Private Tutorial</h1>
+            <p class="tagline">Empowering Education, Nurturing Excellence Since 2010</p>
+        </div>
+        
+        <div class="tutorial-info">
+            <div class="info-card">
+                <h2>📖 About Us</h2>
+                <p>Kalai Private Tutorial is a premier educational institution dedicated to providing quality education to students of all ages. Our mission is to make learning engaging, accessible, and effective for everyone.</p>
+                <br>
+                <p>We specialize in personalized tutoring that adapts to each student's unique learning style and pace.</p>
+            </div>
+            
+            <div class="info-card">
+                <h2>🎯 Our Vision</h2>
+                <p>To become a leading educational platform that transforms lives through quality education and innovative teaching methods.</p>
+                <br>
+                <h2>💡 Our Mission</h2>
+                <p>To provide accessible, high-quality education that empowers students to achieve their full potential.</p>
+            </div>
+        </div>
+        
+        <div class="info-card" style="margin-bottom: 2rem;">
+            <h2>📚 Courses We Offer</h2>
+            <ul>
+                <li>Mathematics (Grade 1-12 & Advanced)</li>
+                <li>Science (Physics, Chemistry, Biology)</li>
+                <li>English Language & Literature</li>
+                <li>Computer Science & Programming</li>
+                <li>Arts & Creative Writing</li>
+                <li>Exam Preparation (SAT, ACT, IELTS, TOEFL)</li>
+            </ul>
+        </div>
+        
+        <div class="info-card" style="margin-bottom: 2rem;">
+            <h2>✨ Why Choose Us?</h2>
+            <ul>
+                <li>Experienced and Certified Teachers</li>
+                <li>Personalized Learning Plans</li>
+                <li>Small Class Sizes (Max 5 students per class)</li>
+                <li>Regular Progress Reports</li>
+                <li>Flexible Scheduling</li>
+                <li>Online & Offline Classes Available</li>
+                <li>Affordable Fee Structure</li>
+                <li>Free Demo Classes</li>
+            </ul>
+        </div>
+        
+        <div class="contact-info">
+            <h2>📞 Contact Information</h2>
+            <div class="contact-details">
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div><strong>Address</strong><br>123 Education Street,<br>Learning City, LC 12345</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div><strong>Email</strong><br>info@kalaituitorial.com<br>support@kalaituitorial.com</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div><strong>Phone</strong><br>+1 234 567 8900<br>+1 234 567 8901</div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <div><strong>Hours</strong><br>Mon-Fri: 9AM - 8PM<br>Sat: 10AM - 4PM</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="main-content" id="featuresPage" style="display: none;">
+    <div class="form-container">
+        <h2>✨ Platform Features</h2>
+        <div class="features" style="grid-template-columns: 1fr;">
+            <div class="feature-card">
+                <div class="feature-icon">✅</div>
+                <h3>Real-time Validation</h3>
+                <p>Instant feedback on all form fields with visual indicators and helpful error messages</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔐</div>
+                <h3>Password Strength Meter</h3>
+                <p>Real-time password strength checking with requirements checklist for enhanced security</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Data Export</h3>
+                <p>Export your registration data to JSON format for backup or analysis</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>Fully Responsive</h3>
+                <p>Works seamlessly on desktop, tablet, and mobile devices</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Modern UI/UX</h3>
+                <p>Beautiful gradient design with smooth animations and transitions</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔄</div>
+                <h3>Multi-page Navigation</h3>
+                <p>Easy navigation between home, registration, about, and features pages</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 2024 Kalai Private Tutorial - Empowering Education. All rights reserved.</p>
+</footer>
+
+<div id="successModal" class="modal">
+    <div class="modal-content">
+        <h3>🎉 Registration Successful!</h3>
+        <p>Welcome to Kalai Private Tutorial family! You will receive a confirmation email shortly.</p>
+        <button class="modal-close" onclick="closeModal()">Continue Learning</button>
+    </div>
+</div>
+
+<script>
+// Navigation
+function showPage(page) {
+    document.getElementById('homePage').style.display = page === 'home' ? 'block' : 'none';
+    document.getElementById('registerPage').style.display = page === 'register' ? 'block' : 'none';
+    document.getElementById('aboutPage').style.display = page === 'about' ? 'block' : 'none';
+    document.getElementById('featuresPage').style.display = page === 'features' ? 'block' : 'none';
+    
+    document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active'));
+    if (page === 'home') document.getElementById('navHome').classList.add('active');
+    if (page === 'register') document.getElementById('navRegister').classList.add('active');
+    if (page === 'about') document.getElementById('navAbout').classList.add('active');
+    if (page === 'features') document.getElementById('navFeatures').classList.add('active');
+    
+    if (page === 'home') updateUserCount();
+}
+
+function toggleMobileMenu() {
+    document.getElementById('navLinks').classList.toggle('active');
+}
+
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
+
+// User count functionality
+let userCount = 0;
+
+function updateUserCount() {
+    document.getElementById('userCount').textContent = userCount;
+}
+
+function saveUser(data) {
+    let users = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+    users.push(data);
+    localStorage.setItem('registeredUsers', JSON.stringify(users));
+    userCount = users.length;
+    updateUserCount();
+}
+
+function exportFormData() {
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        birthdate: document.getElementById('birthdate').value,
+        username: document.getElementById('username').value,
+        gender: document.querySelector('input[name="gender"]:checked')?.value,
+        interests: Array.from(document.querySelectorAll('input[name="interests[]"]:checked')).map(cb => cb.value),
+        country: document.getElementById('country').value,
+        bio: document.getElementById('bio').value,
+        timestamp: new Date().toISOString()
+    };
+    
+    const dataStr = JSON.stringify(formData, null, 2);
+    const blob = new Blob([dataStr], {type: 'application/json'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `student_registration_${Date.now()}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast('Student data exported successfully! 📥');
+}
+
+// Form validation
+const form = document.getElementById('registrationForm');
+const passwordInput = document.getElementById('password');
+const confirmPasswordInput = document.getElementById('confirmPassword');
+const bioTextarea = document.getElementById('bio');
+const bioCounter = document.getElementById('bioCounter');
+
+const lengthReq = document.getElementById('lengthReq');
+const upperReq = document.getElementById('upperReq');
+const lowerReq = document.getElementById('lowerReq');
+const numberReq = document.getElementById('numberReq');
+const specialReq = document.getElementById('specialReq');
+
+document.addEventListener('DOMContentLoaded', function() {
+    setupRealTimeValidation();
+    setupPasswordStrength();
+    setupBioCounter();
+    updateUserCount();
+});
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    if (validateForm()) {
+        const userData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            username: document.getElementById('username').value,
+            registeredAt: new Date().toISOString()
+        };
+        saveUser(userData);
+        document.getElementById('successModal').style.display = 'flex';
+        form.reset();
+        setTimeout(() => {
+            showPage('home');
+        }, 2000);
+    }
+});
+
+function closeModal() {
+    document.getElementById('successModal').style.display = 'none';
+}
+
+function setupRealTimeValidation() {
+    const fields = ['name', 'email', 'phone', 'username', 'password', 'confirmPassword'];
+    fields.forEach(fieldId => {
+        const field = document.getElementById(fieldId);
+        if (field) {
+            field.addEventListener('blur', validateField);
+            field.addEventListener('input', function() {
+                clearFieldError(fieldId);
+                if (fieldId === 'password') updatePasswordRequirements();
+            });
+        }
+    });
+    document.getElementById('birthdate').addEventListener('change', validateField);
+    document.getElementById('country').addEventListener('change', validateField);
+    document.querySelectorAll('input[name="gender"]').forEach(radio => {
+        radio.addEventListener('change', () => clearFieldError('gender'));
+    });
+    document.querySelectorAll('input[name="interests[]"]').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            clearFieldError('interests');
+            validateInterests();
+        });
+    });
+    document.getElementById('terms').addEventListener('change', () => clearFieldError('terms'));
+}
+
+function setupPasswordStrength() {
+    passwordInput.addEventListener('input', updatePasswordRequirements);
+    passwordInput.addEventListener('blur', validatePassword);
+    confirmPasswordInput.addEventListener('blur', validateConfirmPassword);
+}
+
+function setupBioCounter() {
+    bioTextarea.addEventListener('input', function() {
+        const length = this.value.length;
+        bioCounter.textContent = `${length}/500 characters`;
+        if (length > 500) this.classList.add('error-field');
+        else this.classList.remove('error-field');
+    });
+}
+
+function validateForm() {
+    clearErrors();
+    let isValid = true;
+    isValid = validateName() && isValid;
+    isValid = validateEmail() && isValid;
+    isValid = validatePhone() && isValid;
+    isValid = validateDate() && isValid;
+    isValid = validateUsername() && isValid;
+    isValid = validatePassword() && isValid;
+    isValid = validateConfirmPassword() && isValid;
+    isValid = validateInterests() && isValid;
+    isValid = validateCountry() && isValid;
+    isValid = validateBio() && isValid;
+    isValid = validateTerms() && isValid;
+    return isValid;
+}
+
+function validateName() {
+    const name = document.getElementById('name').value.trim();
+    if (name === '') { displayError('name', 'Name is required'); return false; }
+    if (!/^[A-Za-z\s]{2,50}$/.test(name)) { displayError('name', 'Name should contain only letters and spaces (2-50 characters)'); return false; }
+    return true;
+}
+
+function validateEmail() {
+    const email = document.getElementById('email').value.trim();
+    if (email === '') { displayError('email', 'Email is required'); return false; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { displayError('email', 'Please enter a valid email address'); return false; }
+    return true;
+}
+
+function validatePhone() {
+    const phone = document.getElementById('phone').value.trim();
+    if (phone === '') return true;
+    if (!/^(\+\d{1,3})?[\s-]?\(?\d{3}\)?[\s-]?\d{3}[\s-]?\d{4}$/.test(phone)) { displayError('phone', 'Please enter a valid phone number'); return false; }
+    return true;
+}
+
+function validateDate() {
+    const dateInput = document.getElementById('birthdate').value;
+    if (dateInput === '') return true;
+    const birthdate = new Date(dateInput);
+    const today = new Date();
+    const maxAge = new Date(); maxAge.setFullYear(today.getFullYear() - 13);
+    if (birthdate > maxAge) { displayError('birthdate', 'You must be at least 13 years old'); return false; }
+    return true;
+}
+
+function validateUsername() {
+    const username = document.getElementById('username').value.trim();
+    if (username === '') { displayError('username', 'Username is required'); return false; }
+    if (!/^[a-zA-Z0-9_]{3,20}$/.test(username)) { displayError('username', 'Username must be 3-20 characters (letters, numbers, underscores only)'); return false; }
+    return true;
+}
+
+function validatePassword() {
+    const password = passwordInput.value;
+    if (password === '') { displayError('password', 'Password is required'); return false; }
+    const requirements = checkPasswordRequirements(password);
+    if (!requirements.met) { displayError('password', 'Password does not meet all requirements'); return false; }
+    return true;
+}
+
+function validateConfirmPassword() {
+    if (confirmPasswordInput.value === '') { displayError('confirmPassword', 'Please confirm your password'); return false; }
+    if (passwordInput.value !== confirmPasswordInput.value) { displayError('confirmPassword', 'Passwords do not match'); return false; }
+    return true;
+}
+
+function validateInterests() {
+    const interests = document.querySelectorAll('input[name="interests[]"]:checked');
+    if (interests.length > 3) { displayError('interests', 'Please select no more than 3 subjects'); return false; }
+    return true;
+}
+
+function validateCountry() {
+    if (document.getElementById('country').value === '') { displayError('country', 'Please select a country'); return false; }
+    return true;
+}
+
+function validateBio() {
+    if (bioTextarea.value.length > 500) { displayError('bio', 'Bio must be 500 characters or less'); return false; }
+    return true;
+}
+
+function validateTerms() {
+    if (!document.getElementById('terms').checked) { displayError('terms', 'You must agree to the terms and conditions'); return false; }
+    return true;
+}
+
+function checkPasswordRequirements(password) {
+    const requirements = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        special: /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)
+    };
+    requirements.met = Object.values(requirements).every(req => req);
+    return requirements;
+}
+
+function updatePasswordRequirements() {
+    const requirements = checkPasswordRequirements(passwordInput.value);
+    lengthReq.className = requirements.length ? 'requirement met' : 'requirement unmet';
+    upperReq.className = requirements.uppercase ? 'requirement met' : 'requirement unmet';
+    lowerReq.className = requirements.lowercase ? 'requirement met' : 'requirement unmet';
+    numberReq.className = requirements.number ? 'requirement met' : 'requirement unmet';
+    specialReq.className = requirements.special ? 'requirement met' : 'requirement unmet';
+}
+
+function validateField(e) {
+    const fieldId = e.target.id || e.target.name;
+    clearFieldError(fieldId);
+    switch(fieldId) {
+        case 'name': validateName(); break;
+        case 'email': validateEmail(); break;
+        case 'phone': validatePhone(); break;
+        case 'birthdate': validateDate(); break;
+        case 'username': validateUsername(); break;
+        case 'password': validatePassword(); break;
+        case 'confirmPassword': validateConfirmPassword(); break;
+        case 'country': validateCountry(); break;
+        case 'bio': validateBio(); break;
+    }
+}
+
+function displayError(fieldId, message) {
+    let field;
+    if (fieldId === 'gender') field = document.getElementById('genderGroup');
+    else if (fieldId === 'interests') field = document.getElementById('interestsGroup');
+    else if (fieldId === 'terms') field = document.getElementById('terms').parentNode;
+    else field = document.getElementById(fieldId);
+    if (!field) return;
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error';
+    errorDiv.id = fieldId + 'Error';
+    errorDiv.textContent = message;
+    field.parentNode.appendChild(errorDiv);
+    if (field.classList) field.classList.add('error-field');
+}
+
+function clearFieldError(fieldId) {
+    const errorElement = document.getElementById(fieldId + 'Error');
+    let field;
+    if (fieldId === 'gender') field = document.getElementById('genderGroup');
+    else if (fieldId === 'interests') field = document.getElementById('interestsGroup');
+    else if (fieldId === 'terms') field = document.getElementById('terms').parentNode;
+    else field = document.getElementById(fieldId);
+    if (errorElement) errorElement.remove();
+    if (field && field.classList) field.classList.remove('error-field');
+}
+
+function clearErrors() {
+    document.querySelectorAll('.error').forEach(error => error.remove());
+    document.querySelectorAll('.error-field').forEach(field => field.classList.remove('error-field'));
+}
+</script>
+</body>
+</html>
